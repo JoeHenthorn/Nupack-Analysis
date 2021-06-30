@@ -1,0 +1,14 @@
+name: Nupack_Analysis
+channels:
+	- defaults
+	- conda-forge
+dependancies:
+	- python=3.7
+	- numpy
+	- pandas
+	- matplotlib
+	- itertools
+	- datetime
+	- seaborn
+	- jupyter
+	- nupack
