@@ -1,10 +1,9 @@
 # Nupack-Analysis
-<img src='NUPACK_Results.png' width=400px>
+<img src='NUPACK_Results.png' width=500px>
 
 <!-- ABOUT THE PROJECT -->
 
 This repository is meant to be a guide for using python to run an analysis on Nupack.
-
 
 
 
@@ -33,11 +32,12 @@ Nupack documentation: https://piercelab-caltech.github.io/nupack-docs/analysis/
 ## Getting Started
 
 
-To get started, download or clone the repository. You can do this with terminal
+To get started, download or clone the repository. You can do this with by typing the following into terminal:
+
 
 ```sh
-git clone https://github.com/JoeHenthorn/Nupack-Analysis.git
-cd Nupack-Analysis
+	git clone https://github.com/JoeHenthorn/Nupack-Analysis.git
+	cd Nupack-Analysis
 ```
 
 If you do not already have conda installed, do so now.
@@ -46,9 +46,9 @@ https://www.anaconda.com/download/
 or 
 
 ```sh
-# install miniconda (if required)
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh
+	# install miniconda (if prefered)
+	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+	bash Miniconda3-latest-Linux-x86_64.sh
 ```
 
 Once you have conda installed, type the following into terminal:
@@ -59,6 +59,7 @@ Once you have conda installed, type the following into terminal:
 Replace dragNdropfileHere with a drag and dropped NupackENV.yml file.
 
 Now, type into terminal the following command:
+
 ```sh
 	conda activate Nupack_environment
 ```
