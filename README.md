@@ -1,5 +1,5 @@
 # Nupack-Analysis
-<img src='NUPACK_Results.png' width=250px>
+<img src='NUPACK_Results.png' width=400px>
 
 <!-- ABOUT THE PROJECT -->
 
