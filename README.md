@@ -51,6 +51,16 @@ or
 	bash Miniconda3-latest-Linux-x86_64.sh
 ```
 
+If you do not already have jupyter notebooks installed, do so now.
+https://jupyter.org/install
+
+or
+
+```sh
+	conda install -c conda-forge notebook
+```
+
+
 Once you have conda installed, type the following into terminal:
 ```sh
 	conda env create --file dragNdropfileHere --name Nupack_environment
