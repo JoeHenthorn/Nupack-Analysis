@@ -80,11 +80,11 @@ By this point you should be off to the races. Remember to navigate to the Nupack
 	- Data Visualization in python 
 4. [Seaborn](https://anaconda.org/anaconda/seaborn)
 	- High-level interface for attractive graphics
-5. [datetime](https://anaconda.org/trentonoliphant/datetime)
+5. [Datetime](https://anaconda.org/trentonoliphant/datetime)
 	- Date and time library
-6. [jupyter](https://jupyter.org/install)
-	-Python notebook tool
-6. [nupack](http://www.nupack.org/downloads)
+6. [Jupyter](https://jupyter.org/install)
+	- Python notebook tool
+6. [Nupack](http://www.nupack.org/downloads)
 	- DNA & RNA analysis tool
 
 
