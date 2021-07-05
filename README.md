@@ -33,19 +33,20 @@ To run the code, make sure everything is installed. With the jupyter notebook op
 
 The user interface cell should be labeled and will have the following input fields. 
 
-five prime strand sequence
+- Five prime strand sequence
 
-nucleic acid type: DNA or RNA 
+- Nucleic acid type: DNA or RNA 
  
-Temperature start in ˚C
-Temperature end in ˚C
-Temperature incriment
+- Temperature start in ˚C
+- Temperature end in ˚C
+- Temperature incriment
 
-copy number of target/template in sample [Can be a list]
-Sample volume in μL [Can be a list]
+- Copy number of target/template in sample [Can be a list]
 
-Sodium (Na+) molar concentration
-Magnesium (Mg++) molar concentration
+- Sample volume in μL [Can be a list]
+
+- Sodium (Na+) molar concentration
+- Magnesium (Mg++) molar concentration
 
 Lastly, users can choose to save a figure by adding "save" as an argument.
 
