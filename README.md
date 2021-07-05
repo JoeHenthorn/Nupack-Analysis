@@ -27,9 +27,14 @@ nupack-4.0.0.26
 Nupack documentation: https://piercelab-caltech.github.io/nupack-docs/analysis/
 
 
-This python code will run a Nupack analysis, and will produce a percent bound graph for the input conditions. Currently, the code only accepts a 5 prime strand and automatically generates a compliment strand. Future iterations of this code will allow for user specificed 3 prime strands.
+This python code will run a Nupack analysis, and will produce a percent bound graph for the input conditions. 
 
-To run the code, make sure everything is installed. With the jupyter notebook open, run all the import and function cells. Note: (shift+enter) runs cells.
+It is recommended to use the Nupack_Analysis_lite jupyter notebook for general purpose use.
+
+Currently, the code only accepts a 5 prime strand and automatically generates a compliment strand. Future iterations of this code will allow for user specificed 3 prime strands.
+
+
+To run the code, make sure everything is installed. With the jupyter notebook open, run all the import and function cells. Note: (shift+enter) runs cells:
 
 The user interface cell should be labeled and will have the following input fields. 
 
