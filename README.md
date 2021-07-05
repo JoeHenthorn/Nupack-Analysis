@@ -27,6 +27,40 @@ nupack-4.0.0.26
 Nupack documentation: https://piercelab-caltech.github.io/nupack-docs/analysis/
 
 
+This python code will run a Nupack analysis, and will produce a percent bound graph for the input conditions. Currently, the code only accepts a 5 prime strand and automatically generates a compliment strand. Future iterations of this code will allow for user specificed 3 prime strands.
+
+To run the code, make sure everything is installed. With the jupyter notebook open, run all the import and function cells. Note: (shift+enter) runs cells.
+
+The user interface cell should be labeled and will have the following input fields. 
+
+five prime strand sequence
+
+nucleic acid type: DNA or RNA 
+ 
+Temperature start in ˚C
+Temperature end in ˚C
+Temperature incriment
+
+copy number of target/template in sample [Can be a list]
+Sample volume in μL [Can be a list]
+
+Sodium (Na+) molar concentration
+Magnesium (Mg++) molar concentration
+
+Lastly, users can choose to save a figure by adding "save" as an argument.
+
+Note: Users only need to fill out the variables and run the cell. For multiple analyses, just copy the cell, change the variables, and run the new analysis.
+
+
+Note on future work: 
+Future iterations of this code will incorperate list functionality for Na and Mg concetrations.
+
+Future iterations of this code will incorperate more graphing options like 3D surface plots for multiple list inputs (e.g. list of copy numbers and ion concnetrations)
+
+Future iterations of this code might offer a basic GUI depending on user feedback and demand.
+
+
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
