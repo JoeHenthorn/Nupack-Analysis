@@ -31,7 +31,7 @@ This python code will run a Nupack analysis, and will produce a percent bound gr
 
 It is recommended to use the Nupack_Analysis_lite jupyter notebook for general purpose use.
 
-Currently, the code only accepts a 5 prime strand and automatically generates a compliment strand. Future iterations of this code will allow for user specificed 3 prime strands.
+Currently, the code only accepts a 5 prime strand and automatically generates a compliment strand. Future iterations of this code will allow for user specified 3 prime strands.
 
 
 To run the code, make sure everything is installed. With the jupyter notebook open, run all the import and function cells. Note: (shift+enter) runs cells:
