@@ -83,7 +83,7 @@ Future iterations of this code might offer a basic GUI depending on user feedbac
 2. If you do not already have conda installed, do so now.
 https://www.anaconda.com/download/
 
-or 
+  or 
 
 ```sh
 	# install miniconda (if prefered)
@@ -94,7 +94,7 @@ or
 3. If you do not already have jupyter notebooks installed, do so now.
 https://jupyter.org/install
 
-or
+  or
 
 ```sh
 	conda install -c conda-forge notebook
@@ -106,7 +106,7 @@ or
 	conda env create --file dragNdropfileHere --name Nupack_environment
 ```
 
-Replace dragNdropfileHere with a drag and dropped NupackENV.yml file. Thisfile is located in the Nupack-Analysis repository you created in step 1.
+Replace dragNdropfileHere with a drag and dropped NupackENV.yml file. This file is located in the Nupack-Analysis repository you created in step 1.
 
 5. Now, type the following command into terminal:
 
