@@ -72,7 +72,7 @@ Future iterations of this code might offer a basic GUI depending on user feedbac
 ## Getting Started
 
 
-To get started, download or clone the repository. You can do this with by typing the following into terminal:
+1. To get started, download or clone the repository. You can do this with by typing the following into terminal:
 
 
 ```sh
@@ -80,7 +80,7 @@ To get started, download or clone the repository. You can do this with by typing
 	cd Nupack-Analysis
 ```
 
-If you do not already have conda installed, do so now.
+2. If you do not already have conda installed, do so now.
 https://www.anaconda.com/download/
 
 or 
@@ -91,7 +91,7 @@ or
 	bash Miniconda3-latest-Linux-x86_64.sh
 ```
 
-If you do not already have jupyter notebooks installed, do so now.
+3. If you do not already have jupyter notebooks installed, do so now.
 https://jupyter.org/install
 
 or
@@ -101,24 +101,24 @@ or
 ```
 
 
-Once you have conda installed, type the following into terminal:
+4. Once you have conda installed, type the following into terminal:
 ```sh
 	conda env create --file dragNdropfileHere --name Nupack_environment
 ```
 
-Replace dragNdropfileHere with a drag and dropped NupackENV.yml file.
+Replace dragNdropfileHere with a drag and dropped NupackENV.yml file. Thisfile is located in the Nupack-Analysis repository you created in step 1.
 
-Now, type into terminal the following command:
+5. Now, type the following command into terminal:
 
 ```sh
 	conda activate Nupack_environment
 ```
-Next type:
+6. Next type:
 ```sh
 	jupyter notebook.
 ```
 
-By this point you should be off to the races. Remember to navigate to the Nupack_Analysis.ipynb file inside your jupyter notebook to open the file.
+By this point you should be off to the races. Remember to navigate to the Nupack_Analysis.ipynb file inside your jupyter notebook browser to open the file.
 
 
 ## Dependencies
