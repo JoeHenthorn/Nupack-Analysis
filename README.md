@@ -103,6 +103,12 @@ https://jupyter.org/install
 
 4. Once you have conda installed, type the following into terminal:
 ```sh
+	cd Nupack-Analysis
+	conda env create --file NupackENV.yml --name Nupack_environment
+```
+If the command above fails for any reason, you can manually create the Nupack_environment with the following:
+
+```sh
 	conda env create --file dragNdropfileHere --name Nupack_environment
 ```
 
