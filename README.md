@@ -77,6 +77,8 @@ To get started, download or clone the repository. You can do this with by typing
 
 ```sh
 	git clone https://github.com/JoeHenthorn/Nupack-Analysis.git
+```
+```sh
 	cd Nupack-Analysis
 ```
 
@@ -90,6 +92,12 @@ or
 	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 	bash Miniconda3-latest-Linux-x86_64.sh
 ```
+Once you have anaconda installed, activate the conda envirnment with,
+
+```sh
+	conda activate ]
+```
+
 
 If you do not already have jupyter notebooks installed, do so now.
 https://jupyter.org/install
@@ -101,17 +109,38 @@ or
 ```
 
 
-Once you have conda installed, type the following into terminal:
+Once you have conda installed, you need to create the virtual environment with the correct packages to run the code. Type the following into terminal:
+
+```sh
+	conda env create -f NupackENV.yml
+```
+If this command fails for any reason, try the following,
+
 ```sh
 	conda env create --file dragNdropfileHere --name Nupack_environment
 ```
 
 Replace dragNdropfileHere with a drag and dropped NupackENV.yml file.
 
+If you still cannot create the Nupack_environment, your conda packages might need updating. Try the command below, then retry the previous command.
+
+
+```sh
+	conda clean — packages && conda clean –all && conda update –all
+```
+
+
+Check that the environment was successfully created with the command below. You should see an output simular to "/Users/[You]/opt/anaconda3/envs/Nupack_Analysis"
+
+
+```sh
+	conda env list
+```
+
 Now, type into terminal the following command:
 
 ```sh
-	conda activate Nupack_environment
+	conda activate Nupack_Analysis
 ```
 Next type:
 ```sh
