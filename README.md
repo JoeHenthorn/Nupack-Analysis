@@ -31,7 +31,7 @@ This python code will run a Nupack analysis, and will produce a percent bound gr
 
 It is recommended to use the Nupack_Analysis_lite jupyter notebook for general purpose use.
 
-Currently, the code only accepts a 5 prime strand and automatically generates a compliment strand. Future iterations of this code will allow for user specified 3 prime strands.
+Currently, the code only accepts a 5 prime strand and automatically generates a compliment strand. Future iterations of this code will allow for user specificed 3 prime strands.
 
 
 To run the code, make sure everything is installed. With the jupyter notebook open, run all the import and function cells. Note: (shift+enter) runs cells:
@@ -72,7 +72,7 @@ Future iterations of this code might offer a basic GUI depending on user feedbac
 ## Getting Started
 
 
-1. To get started, download or clone the repository. You can do this with by typing the following into terminal:
+To get started, download or clone the repository. You can do this with by typing the following into terminal:
 
 
 ```sh
@@ -82,10 +82,10 @@ Future iterations of this code might offer a basic GUI depending on user feedbac
 	cd Nupack-Analysis
 ```
 
-2. If you do not already have conda installed, do so now.
+If you do not already have conda installed, do so now.
 https://www.anaconda.com/download/
 
-  or 
+or 
 
 ```sh
 	# install miniconda (if prefered)
@@ -99,39 +99,29 @@ Once you have anaconda installed, activate the conda envirnment with,
 ```
 
 
-3. If you do not already have jupyter notebooks installed, do so now.
+If you do not already have jupyter notebooks installed, do so now.
 https://jupyter.org/install
 
-  or
+or
 
 ```sh
 	conda install -c conda-forge notebook
 ```
 
 
-<<<<<<< HEAD
 Once you have conda installed, you need to create the virtual environment with the correct packages to run the code. Type the following into terminal:
 
 ```sh
 	conda env create -f NupackENV.yml
 ```
 If this command fails for any reason, try the following,
-=======
-4. Once you have conda installed, type the following into terminal:
-```sh
-	cd Nupack-Analysis
-	conda env create --file NupackENV.yml --name Nupack_environment
-```
-If the command above fails for any reason, you can manually create the Nupack_environment with the following:
->>>>>>> da000bf700d33d504d2bfec9770df9580859e4f4
 
 ```sh
 	conda env create --file dragNdropfileHere --name Nupack_environment
 ```
 
-Replace dragNdropfileHere with a drag and dropped NupackENV.yml file. This file is located in the Nupack-Analysis repository you created in step 1.
+Replace dragNdropfileHere with a drag and dropped NupackENV.yml file.
 
-<<<<<<< HEAD
 If you still cannot create the Nupack_environment, your conda packages might need updating. Try the command below, then retry the previous command.
 
 
@@ -148,19 +138,16 @@ Check that the environment was successfully created with the command below. You 
 ```
 
 Now, type into terminal the following command:
-=======
-5. Now, type the following command into terminal:
->>>>>>> da000bf700d33d504d2bfec9770df9580859e4f4
 
 ```sh
 	conda activate Nupack_Analysis
 ```
-6. Next type:
+Next type:
 ```sh
 	jupyter notebook.
 ```
 
-By this point you should be off to the races. Remember to navigate to the Nupack_Analysis.ipynb file inside your jupyter notebook browser to open the file.
+By this point you should be off to the races. Remember to navigate to the Nupack_Analysis.ipynb file inside your jupyter notebook to open the file.
 
 
 ## Dependencies
