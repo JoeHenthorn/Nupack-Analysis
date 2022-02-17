@@ -80,6 +80,7 @@ R. M. Dirks, J. S. Bois, J. M. Schaeffer, E. Winfree, and N. A. Pierce. Thermody
 <!-- GETTING STARTED -->
 ## Getting Started
 =======
+
 1. To get started, download or clone the repository. You can do this with by typing the following into terminal:
 
 
@@ -144,7 +145,7 @@ If the command above fails for any reason, you can manually create the Nupack_en
 Replace dragNdropfileHere with a drag and dropped NupackENV.yml file. 
 This file is located in the Nupack-Analysis repository you created in step 1.
 
-<<<<<<< HEAD
+
 
 If you still cannot create the Nupack_environment, your conda packages might need updating. 
 Try the command below, then retry the previous command.
@@ -163,7 +164,7 @@ You should see an output simular to "/Users/[You]/opt/anaconda3/envs/Nupack_Anal
 	conda env list
 ```
 
-Now, type into terminal the following command:
+
 =======
 5. Now, type the following command into terminal:
 
