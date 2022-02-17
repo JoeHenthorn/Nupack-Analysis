@@ -93,8 +93,9 @@ cd ~/Nupack_Analysis
 #### 2. If you do not already have conda installed, do so now.
 https://www.anaconda.com/download/
 
-     or 
+or 
 install miniconda (if prefered)
+
 ```sh
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
