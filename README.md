@@ -81,7 +81,7 @@ R. M. Dirks, J. S. Bois, J. M. Schaeffer, E. Winfree, and N. A. Pierce. Thermody
 ## Getting Started
 =======
 
-1. To get started, download or clone the repository. You can do this with by typing the following into terminal:
+###### 1. To get started, download or clone the repository. You can do this with by typing the following into terminal:
 
 
 ```sh
@@ -91,7 +91,7 @@ R. M. Dirks, J. S. Bois, J. M. Schaeffer, E. Winfree, and N. A. Pierce. Thermody
  cd ~/Nupack_Analysis
 ```
 
-2. If you do not already have conda installed, do so now.
+###### 2. If you do not already have conda installed, do so now.
 https://www.anaconda.com/download/
 
   or 
@@ -111,7 +111,7 @@ Once you have anaconda installed, activate the conda envirnment with,
 ```
 
 
-3. If you do not already have jupyter notebooks installed, do so now.
+###### 3. If you do not already have jupyter notebooks installed, do so now.
 https://jupyter.org/install
 
   or
@@ -121,8 +121,6 @@ https://jupyter.org/install
 ```
 
 
-<<<<<<< HEAD
-
 Once you have conda installed, you need to create the virtual environment with the correct packages to run the code. Type the following into terminal:
 
 ```sh
@@ -130,7 +128,7 @@ Once you have conda installed, you need to create the virtual environment with t
 ```
 If this command fails for any reason, try the following,
 
-4. Once you have conda installed, type the following into terminal:
+###### 4. Once you have conda installed, type the following into terminal:
 ```sh
 	cd ~/Nupack_Analysis
 	conda env create --file NupackENV.yml --name Nupack_environment
@@ -165,15 +163,14 @@ You should see an output simular to "/Users/[You]/opt/anaconda3/envs/Nupack_Anal
 ```
 
 
-=======
-5. Now, type the following command into terminal:
+###### 5. Now, type the following command into terminal:
 
 
 ```sh
 	conda activate Nupack_Analysis
 ```
 
-6. Go to Nupack's website and download the python package if you have not already done so. You will need to register with NUPACK to gain access to their python package. Don't for get to cite them.
+###### 6. Go to Nupack's website and download the python package if you have not already done so. You will need to register with NUPACK to gain access to their python package. Don't for get to cite them.
 
 http://www.nupack.org/downloads
 
@@ -188,7 +185,7 @@ Note: If you download a newer version of Nupack, replace 4.0.0.27 with the versi
 ```
 
 
-7. Next type:
+###### 7. Next type:
 ```sh
 	jupyter notebook.
 ```
