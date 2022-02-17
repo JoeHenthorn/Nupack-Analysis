@@ -131,7 +131,7 @@ If this command fails for any reason, try the following,
 
 4. Once you have conda installed, type the following into terminal:
 ```sh
-	cd Nupack-Analysis
+	cd ~/Nupack_Analysis
 	conda env create --file NupackENV.yml --name Nupack_environment
 ```
 If the command above fails for any reason, you can manually create the Nupack_environment with the following:
@@ -178,7 +178,7 @@ http://www.nupack.org/downloads
 
 After downloading the nupack file, paste the following into terminal. (ensure you are in  the Nupack_Analysis envirmonment before executing the following command. 
 ```sh
-cd ~/Nupack_Analysis
+   cd ~/Nupack_Analysis
 ```
 
 Note: If you download a newer version of Nupack, replace 4.0.0.27 with the version you downloaded.
