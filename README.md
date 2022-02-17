@@ -81,25 +81,24 @@ R. M. Dirks, J. S. Bois, J. M. Schaeffer, E. Winfree, and N. A. Pierce. Thermody
 ## Getting Started
 =======
 
-###### 1. To get started, download or clone the repository. You can do this with by typing the following into terminal:
+#### 1. To get started, download or clone the repository. You can do this with by typing the following into terminal:
 
 
 ```sh
-	git clone https://github.com/JoeHenthorn/Nupack-Analysis.git
+git clone https://github.com/JoeHenthorn/Nupack-Analysis.git
 ```
 ```sh
- cd ~/Nupack_Analysis
+cd ~/Nupack_Analysis
 ```
 
-###### 2. If you do not already have conda installed, do so now.
+#### 2. If you do not already have conda installed, do so now.
 https://www.anaconda.com/download/
 
   or 
-
+# install miniconda (if prefered)
 ```sh
-	# install miniconda (if prefered)
-	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-	bash Miniconda3-latest-Linux-x86_64.sh
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
 ```
 Note: This mini conda install might not work if you have a zsh shell running your terminal. If you have MacOS Catalina, there's a good chance this means you.
 
@@ -107,37 +106,37 @@ Note: This mini conda install might not work if you have a zsh shell running you
 Once you have anaconda installed, activate the conda envirnment with,
 
 ```sh
-	conda activate
+conda activate
 ```
 
 
-###### 3. If you do not already have jupyter notebooks installed, do so now.
+#### 3. If you do not already have jupyter notebooks installed, do so now.
 https://jupyter.org/install
 
   or
 
 ```sh
-	conda install -c conda-forge notebook
+conda install -c conda-forge notebook
 ```
 
 
 Once you have conda installed, you need to create the virtual environment with the correct packages to run the code. Type the following into terminal:
 
 ```sh
-	conda env create -f NupackENV.yml
+conda env create -f NupackENV.yml
 ```
 If this command fails for any reason, try the following,
 
-###### 4. Once you have conda installed, type the following into terminal:
+#### 4. Once you have conda installed, type the following into terminal:
 ```sh
-	cd ~/Nupack_Analysis
-	conda env create --file NupackENV.yml --name Nupack_environment
+cd ~/Nupack_Analysis
+conda env create --file NupackENV.yml --name Nupack_environment
 ```
 If the command above fails for any reason, you can manually create the Nupack_environment with the following:
 
 
 ```sh
-	conda env create --file dragNdropfileHere --name Nupack_environment
+conda env create --file dragNdropfileHere --name Nupack_environment
 ```
 
 Replace dragNdropfileHere with a drag and dropped NupackENV.yml file. 
@@ -150,7 +149,7 @@ Try the command below, then retry the previous command.
 
 
 ```sh
-	conda clean — packages && conda clean –all && conda update –all
+conda clean — packages && conda clean –all && conda update –all
 ```
 
 
@@ -159,7 +158,7 @@ You should see an output simular to "/Users/[You]/opt/anaconda3/envs/Nupack_Anal
 
 
 ```sh
-	conda env list
+conda env list
 ```
 
 
@@ -167,27 +166,27 @@ You should see an output simular to "/Users/[You]/opt/anaconda3/envs/Nupack_Anal
 
 
 ```sh
-	conda activate Nupack_Analysis
+conda activate Nupack_Analysis
 ```
 
-###### 6. Go to Nupack's website and download the python package if you have not already done so. You will need to register with NUPACK to gain access to their python package. Don't for get to cite them.
+#### 6. Go to Nupack's website and download the python package if you have not already done so. You will need to register with NUPACK to gain access to their python package. Don't for get to cite them.
 
 http://www.nupack.org/downloads
 
 After downloading the nupack file, paste the following into terminal. (ensure you are in  the Nupack_Analysis envirmonment before executing the following command. 
 ```sh
-   cd ~/Nupack_Analysis
+cd ~/Nupack_Analysis
 ```
 
 Note: If you download a newer version of Nupack, replace 4.0.0.27 with the version you downloaded.
 ```sh
-	pip install -U nupack -f ~/Downloads/nupack-4.0.0.27/package
+pip install -U nupack -f ~/Downloads/nupack-4.0.0.27/package
 ```
 
 
-###### 7. Next type:
+#### 7. Next type:
 ```sh
-	jupyter notebook.
+jupyter notebook.
 ```
 
 By this point you should be off to the races. Remember to navigate to the Nupack_Analysis.ipynb file inside your jupyter notebook browser to open the file.
