@@ -80,7 +80,6 @@ R. M. Dirks, J. S. Bois, J. M. Schaeffer, E. Winfree, and N. A. Pierce. Thermody
 <!-- GETTING STARTED -->
 ## Getting Started
 =======
-
 1. To get started, download or clone the repository. You can do this with by typing the following into terminal:
 
 
@@ -122,6 +121,7 @@ https://jupyter.org/install
 
 
 <<<<<<< HEAD
+
 Once you have conda installed, you need to create the virtual environment with the correct packages to run the code. Type the following into terminal:
 
 ```sh
