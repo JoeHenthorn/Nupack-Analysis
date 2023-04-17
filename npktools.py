@@ -1,5 +1,6 @@
 import itertools
 import logging
+import time
 
 import numpy as np
 import pandas as pd
@@ -221,8 +222,13 @@ def save_fig(fig, name='figures/NUPACK_results_'):
     """
     date = datetime.now()
     date_str = str(date).replace('-', '').replace(' ', '_').replace(':', '')[:-7]
-    fig.savefig(name + date_str + '.png', dpi=100, bbox_inches='tight')
-    return print("Figure saved")
+    # catch error if figure is not saved
+    try:
+        fig.savefig(name + date_str + '.png', dpi=100, bbox_inches='tight')
+        return print("Figure saved")
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
 #%% Main Functions
 
@@ -370,56 +376,56 @@ def specify_strands(fiveprime_strands):
     return A, B
 
 
-def specify_tube(strand_dict, setSpec=2):
-    """Inputs: strand_dict: dict of strand names and concentrations (in M)
-                 setSpec: int, all complexes of up to setSpec strands
-       Output: tube object and complexes object
-    """
-    strand_names = list(strand_dict.keys())
-    strands = {name: Strand(seq, material='dna') for name, seq in strand_dict.items()}
-
-    dict_of_concentrations = {}
-    for name, conc in strand_dict.items():
-        dict_of_concentrations[name] = make_list(conc)
-
-    tube_dict = {}
-    i = 0
-    for strand_combination in itertools.combinations_with_replacement(strand_names, setSpec):
-        concs = [dict_of_concentrations[strand_name] for strand_name in strand_combination]
-        tube_name = ', '.join([f'{name}: {conc} M' for name, conc in zip(strand_combination, concs)])
-        tube_strands = {name: conc for name, conc in zip(strand_combination, concs)}
-        tube_dict[tube_name] = Tube(strands=tube_strands, complexes=SetSpec(max_size=setSpec), name=tube_name)
-        i += 1
-
-    return tube_dict
-
-
 # def specify_tube(strand_dict, setSpec=2):
-#     """Inputs: A & B are <Strand Strand A>, can be list, must be same size,
-#                concentrations as molar: e.g. input 1e-9 as 1nm
-#                setSpec: int(), all complexes of up to 2 strands
-#                name: string of tube name/number.
+#     """Inputs: strand_dict: dict of strand names and concentrations (in M)
+#                  setSpec: int, all complexes of up to setSpec strands
 #        Output: tube object and complexes object
 #     """
-#     # get the names of the strands in the input dictionary
 #     strand_names = list(strand_dict.keys())
+#     strands = {name: Strand(seq, material='dna') for name, seq in strand_dict.items()}
 #
-#     # generate all possible combinations of strand concentrations
-#     strand_concentrations = [make_list(concentration) for concentration in strand_dict.values()]
-#     strand_combinations = list(itertools.product(*strand_concentrations))
+#     dict_of_concentrations = {}
+#     for name, conc in strand_dict.items():
+#         dict_of_concentrations[name] = make_list(conc)
 #
-#     # create a dictionary of strand names and concentrations
-#     strand_concentration_dict = {name: conc for name, conc in zip(strand_names, strand_combinations)}
+#     tube_dict = {}
+#     i = 0
+#     for strand_combination in itertools.combinations_with_replacement(strand_names, setSpec):
+#         concs = [dict_of_concentrations[strand_name] for strand_name in strand_combination]
+#         tube_name = ', '.join([f'{name}: {conc} M' for name, conc in zip(strand_combination, concs)])
+#         tube_strands = {name: conc for name, conc in zip(strand_combination, concs)}
+#         tube_dict[tube_name] = Tube(strands=tube_strands, complexes=SetSpec(max_size=setSpec), name=tube_name)
+#         i += 1
 #
-#     # create a list of Tube objects
-#     tubes = {}
-#     for strand_combination in strand_combinations:
-#         tube_strands = {name: conc for name, conc in zip(strand_names, strand_combination)}
-#         tube_name = ', '.join([f"{name}: {conc:.2g}M" for name, conc in tube_strands.items()])
-#         tubes[tube_name] = Tube(strands=tube_strands, complexes=SetSpec(max_size=setSpec), name=tube_name)
-#
-#     print_tubes(tubes)
-#     return tubes
+#     return tube_dict
+
+
+def specify_tube(strand_dict, setSpec=2):
+    """Inputs: A & B are <Strand Strand A>, can be list, must be same size,
+               concentrations as molar: e.g. input 1e-9 as 1nm
+               setSpec: int(), all complexes of up to 2 strands
+               name: string of tube name/number.
+       Output: tube object and complexes object
+    """
+    # get the names of the strands in the input dictionary
+    strand_names = list(strand_dict.keys())
+
+    # generate all possible combinations of strand concentrations
+    strand_concentrations = [make_list(concentration) for concentration in strand_dict.values()]
+    strand_combinations = list(itertools.product(*strand_concentrations))
+
+    # create a dictionary of strand names and concentrations
+    strand_concentration_dict = {name: conc for name, conc in zip(strand_names, strand_combinations)}
+
+    # create a list of Tube objects
+    tubes = {}
+    for strand_combination in strand_combinations:
+        tube_strands = {name: conc for name, conc in zip(strand_names, strand_combination)}
+        tube_name = ', '.join([f"{name}: {conc:.2g}M" for name, conc in tube_strands.items()])
+        tubes[tube_name] = Tube(strands=tube_strands, complexes=SetSpec(max_size=setSpec), name=tube_name)
+
+    print_tubes(tubes)
+    return tubes
 #
 #
 # # #### NEED TO IMPROVE THIS FUNCTION TO ANALYSE MORE STRANDS
@@ -861,81 +867,47 @@ def plot_experiment(temp_concBound, concentration_A, sampleVolume_uL, targetAmou
     # plt.savefig('figures/test.png')
     return fig
 
-# def plot_experiment(temp_concBound, concentration_A, sampleVolume_uL, targetAmount, species="B"):
-#     """This function plots the analyzed results found from Nupack
-#         Input: dictionary of temperatures and % bound species, sample volume in μL,
-#                target molc amount
-#         Output: Plot of results
-#     """
-#
-#     # handling species input
-#     if species.upper() == "B":
-#         dependent_var = 'Percent bound [AB]/[B$]_{0}$'
-#         bound_species = "percent_bound_B"
-#
-#     elif species.upper() == "A":
-#         dependent_var = "Percent bound [AB]/[A]"
-#         bound_species = "percent_bound_A"
-#
-#     # Custom title
-#     if species == "B":
-#         nout = "o"
-#     else:
-#         nout = ""
-#     title_seg1 = ("Percent bound ([AB]/[" + str(species) + "$]_{0}$" + "). " + str(
-#         "{:.2e}".format(targetAmount)) + " copies of target in " +
-#                   str(sampleVolume_uL) + " μL")
-#
-#     fig, axes = plt.subplots(figsize=(10, 6), nrows=1, ncols=1)
-#
-#     colors = cycle(['tab:blue', 'tab:orange', 'tab:red', 'tab:green', 'tab:purple',
-#                     'tab:pink', 'tab:cyan', 'tab:olive', 'tab:brown', 'k'])
-#
-#     ####
-#
-#     ##
-#     for i in range(0, len(temp_concBound)):
-#
-#         Na_M = temp_concBound[i]["Na_M"]
-#         Mg_M = temp_concBound[i]["Mg_M"]
-#
-#         flag_1 = True  # A generic boolian for formatting new lines in the title bar
-#         ions = ''
-#
-#         if len(np.unique(Na_M.squeeze())) == 1:
-#             title_seg2 = '   $Na^+ (M): $' + str(Na_M[i])
-#             #             ions = ions + title_seg2 # part of legend label for Na salts
-#
-#             title = title_seg1 + '.' + '\n' + title_seg2
-#         else:
-#             flag_1 = False
-#             ions = ions + title_seg2  # part of legend label for Na salts
-#             title_seg2 = '   $Na^+ (M): $' + ', '.join(map(str, list(Na_M.squeeze().unique())))
-#             title = title_seg1 + '\n' + title_seg2
-#
-#         if len(np.unique(Mg_M.squeeze())) == 1 and flag_1 == True:
-#             title_seg3 = ' $Mg^{++} (M): $' + str(Mg_M[i])
-#
-#             #             ions = ions + title_seg3 # part of legend label for Na salts
-#             title = title + '\n' + title_seg3
-#         else:
-#             ions = ions + title_seg3  # part of legend label for Na salts
-#             title = title + '\n' + '$Mg^{++} (M): $' + ', '.join(map(str, list(Mg_M.squeeze().unique())))
-#
-#         legend_label = 'Probe Conc: ' + str(concentration_A[i]) + ' M. ' + ions
-#
-#         X = temp_concBound[i]["TempC"]
-#         Y = (temp_concBound[i][bound_species])
-#         axes.plot(X, Y, color=next(colors), markersize=8, marker='o', fillstyle='none', linewidth=2, label=legend_label)
-#     axes.set_xlabel('Temperature [C]', fontsize=16)
-#     axes.set_ylabel(dependent_var, fontsize=16)
-#     axes.set_title(title, fontsize=16)
-#     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize='large')
-#
-#     fig.tight_layout()
-#     plt.show()
-#     plt.savefig('figures/test.png')
-#     return fig
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from itertools import cycle
+
+
+def plot_isotherm(temp_concBound, concentration_A, sampleVolume_uL, targetAmount, species="B"):
+    fig, axes = plt.subplots(figsize=(12, 8), nrows=1, ncols=1)
+    colors = cycle(['tab:blue', 'tab:orange', 'tab:red', 'tab:green', 'tab:purple',
+                    'tab:pink', 'tab:cyan', 'tab:olive', 'tab:brown', 'k'])
+
+    # Extract unique temperatures
+    unique_temps = sorted(list(set(temp_concBound[0]["TempC"])))
+
+    for temp in unique_temps:
+        Y_values = []
+        for temp_df in range(len(temp_concBound)):
+            temp_df_filtered = temp_concBound[temp_df][temp_concBound[temp_df]["TempC"] == temp]
+            if not temp_df_filtered.empty:
+                Y_values.append(temp_df_filtered[f"percent_bound_{species.upper()}"].iloc[0])
+
+        Na_M = temp_concBound[0]["Na_M"].iloc[0]
+        Mg_M = temp_concBound[0]["Mg_M"].iloc[0]
+        legend_label = f'Temp: {temp}°C'
+
+        X = concentration_A[:len(Y_values)]
+        axes.plot(X, Y_values, color=next(colors), markersize=10, marker='o', fillstyle='none', linewidth=2,
+                  label=legend_label)
+
+    axes.set_xlabel('Concentration of strand_A [M]', fontsize=18)
+    # axes.set_xlabel('Concentration of strand_A [M]', fontsize=18)
+    axes.set_ylabel(f'Fraction bound to {species.upper()}', fontsize=18)
+    axes.set_title(f'Isotherm for {species.upper()} binding \nProbe Conc: {concentration_A[0]} M \nNa: {Na_M} M, '
+                   f'Mg: {Mg_M} M', fontsize=20, pad=20)
+    axes.set_xscale('log')
+    axes.grid(True)
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize='large')
+
+    fig.tight_layout()
+    plt.show()
+    return fig
 
 
 def run_all(strands='ATGC', nucleic_acid_type='dna', temperature_C=37, sampleVolume_uL=25,
@@ -979,13 +951,17 @@ def run_all(strands='ATGC', nucleic_acid_type='dna', temperature_C=37, sampleVol
 
     ##### Comment out plotting for debugging
     fig = plot_experiment(temp_concBound, concentration_A, sampleVolume_uL, targetAmount, species)
-
+    if savefig:  #.lower():
+        save_fig(fig)
+    # pause process for 1 second
+    time.sleep(1)
+    fig = plot_isotherm(temp_concBound, concentration_A, sampleVolume_uL, targetAmount, species)
     if savefig:  #.lower():
         save_fig(fig)
 
     return results, df_Nupack, temp_concBound, t_result, c_result
 
-    #
+
     # if strands is None and strand_dict is None:
     #     raise ValueError("Either 'strands' or 'strand_dict' must be provided")
     #
