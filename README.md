@@ -48,7 +48,7 @@ cd ~/nupack_analysis
 2. Install Docker on your computer by following the instructions for your operating system on the Docker website: 
 https://www.docker.com/get-started.
 
-* Note: Docker for desktop needs to be running for the container to work.
+### * Note: Docker for desktop needs to be running for the container to work.
 
 3. Open a terminal or command prompt and pull the nptb image from Docker Hub by running the following command:
 
@@ -67,7 +67,7 @@ Replace /path/to/nupack_analysis with the actual path to the nupack_analysis dir
 Once the container starts, you should see the terminal prompt change to `(base) 
 root@xxxxxxxxxxxx:/home/nupack_user/app#` where the `x`'s are replaced with letters and numerals. 
 
-* note: If you have previously created and started the container, you can reopen it with:
+### * Note: If you have previously created and started the container, you can reopen it with:
 
 ```bash
 docker start -ai nptb
@@ -75,14 +75,14 @@ docker start -ai nptb
 
 6. From here, you can run the experiment by running the following command, in the container:
 ```bash
-python run_expt_01.py
+python run_expt.py
 ```
 This will execute the run_expt_01.py script, which will generate the figures in the figures directory.
 
 If you want to run a Jupyter notebook, you can start the Jupyter server by running the following command in the container:
 
-```css
-jupyter notebook --ip=0.0.0.0 --port=5000 --no-browser
+```bash
+jupyter Nupack_Analysis_lite.ipynb --ip=0.0.0.0 --port=5000 --no-browser
 ```
 This will start the Jupyter server on port 5000 and allow you to access it from your local computer by going to http://localhost:5000 in your web browser.
 
@@ -96,6 +96,15 @@ or pressing Ctrl+D. This will stop the container and return you to your local te
 If you want to come back to the container later and continue working on the experiment, you can start the container 
 again by running the same docker run command as before (step 5.b). This will mount the nupack_analysis directory to the 
 container and allow you to continue working where you left off.
+
+8. To remove the container, run the following command:
+```bash
+docker rm nptb
+```
+
+### * Note:
+These instructions are for running the code from the command line. If you use an IDE, such as PyCharm or VS Code, you 
+can the code from there and get access to the useful features of those IDEs. Can provide instructions for this if needed.
 
 ## Citation
 If you use this code for generating data for publication, remember to cite the NUPACK authors with the citations below.
