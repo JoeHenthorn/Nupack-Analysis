@@ -303,8 +303,8 @@ def models_maker(nucleic_acid_type='dna', temperature_C=37, Na_M=0.05, Mg_M=0):
                 # If you want your output to match the NUPACK web app, comment out the model line about and uncomment
                 # the line below.
                 # FOR DNA
-                # models[label] = Model(material='dna04', ensemble='stacking', celsius=temp, sodium=conc_Na, magnesium=conc_Mg)
-                models[label] = Model(material='dna04-nupack3', ensemble='some-nupack3', celsius=temp, sodium=conc_Na, magnesium=conc_Mg)
+                models[label] = Model(material='dna04-nupack3', ensemble='some-nupack3', celsius=temp, sodium=conc_Na,
+                                      magnesium=conc_Mg)
                 # FOR RNA
                 # models[label] = Model(material='rna95-nupack3', celsius=temp, sodium=conc_Na, magnesium=conc_Mg)
                 i += 1
@@ -526,21 +526,7 @@ def analysis_job(tubes, models):
             # run tube analysis job # Debugging
             # tube = tube[list(tube.keys())[0]] # Debugging
             # model = model[list(model.keys())[0]] # Debugging
-            try:
-                results[label_full] = tube_analysis(tubes=[tube], model=model)  #, **kwargs)
-            # except AssertionError as e:
-            #     print("AssertionError: "+str(e))
-            #     print("Tube: "+str(tube))
-            #     print("Model: "+str(model))
-            #     print("Label: "+str(label))
-            #     print("Label_full: "+str(label_full))
-            except Exception as e:
-                print("Exception: "+str(e))
-                print("Tube: "+str(tube))
-                print("Model: "+str(model))
-                print("Label: "+str(label))
-                print("Label_full: "+str(label_full))
-
+            results[label_full] = tube_analysis(tubes=[tube], model=model)  #, **kwargs)
 
             ii += 1
         i += 1
@@ -887,7 +873,7 @@ import pandas as pd
 from itertools import cycle
 
 
-def plot_isotherm(temp_concBound, concentration_A, concentration_B, sampleVolume_uL, targetAmount, species="B"):
+def plot_isotherm(temp_concBound, concentration_A, sampleVolume_uL, targetAmount, species="B"):
     fig, axes = plt.subplots(figsize=(12, 8), nrows=1, ncols=1)
     colors = cycle(['tab:blue', 'tab:orange', 'tab:red', 'tab:green', 'tab:purple',
                     'tab:pink', 'tab:cyan', 'tab:olive', 'tab:brown', 'k'])
@@ -913,8 +899,8 @@ def plot_isotherm(temp_concBound, concentration_A, concentration_B, sampleVolume
     axes.set_xlabel('Concentration of strand_A [M]', fontsize=18)
     # axes.set_xlabel('Concentration of strand_A [M]', fontsize=18)
     axes.set_ylabel(f'Fraction bound to {species.upper()}', fontsize=18)
-    axes.set_title(f'Isotherm for {species.upper()} binding \nTemplate Conc: {concentration_B[0]} M\nProbe Conc:'
-                   f' {concentration_A[0]} M \nNa: {Na_M} M, Mg: {Mg_M} M', fontsize=20, pad=20)
+    axes.set_title(f'Isotherm for {species.upper()} binding \nProbe Conc: {concentration_A[0]} M \nNa: {Na_M} M, '
+                   f'Mg: {Mg_M} M', fontsize=20, pad=20)
     axes.set_xscale('log')
     axes.grid(True)
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize='large')
@@ -922,6 +908,112 @@ def plot_isotherm(temp_concBound, concentration_A, concentration_B, sampleVolume
     fig.tight_layout()
     plt.show()
     return fig
+
+
+# def plot_isotherm(temp_concBound, concentration_A, sampleVolume_uL, targetAmount, species="B"):
+#     fig, axes = plt.subplots(figsize=(12, 8), nrows=1, ncols=1)
+#     colors = cycle(['tab:blue', 'tab:orange', 'tab:red', 'tab:green', 'tab:purple',
+#                     'tab:pink', 'tab:cyan', 'tab:olive', 'tab:brown', 'k'])
+#
+#     # Extract unique temperatures
+#     unique_temps = sorted(list(set(temp_concBound[0]["TempC"])))
+#
+#     for temp in unique_temps:
+#         temp_df = temp_concBound[0][temp_concBound[0]["TempC"] == temp]
+#         Na_M = temp_df["Na_M"].iloc[0]
+#         Mg_M = temp_df["Mg_M"].iloc[0]
+#         legend_label = f'Temp: {temp}°C, Probe Conc: {concentration_A[0]} M, Na: {Na_M} M, Mg: {Mg_M} M'
+#
+#         X = concentration_A[:len(temp_df)]
+#         Y = temp_df[f"percent_bound_{species.upper()}"]
+#         axes.plot(X, Y, color=next(colors), markersize=10, marker='o', fillstyle='none', linewidth=2, label=legend_label)
+#
+#     axes.set_xlabel('Concentration of strand_A [M]', fontsize=18)
+#     axes.set_ylabel(f'Fraction bound to {species.upper()}', fontsize=18)
+#     axes.set_title(f'Isotherm for {species.upper()} binding', fontsize=20, pad=20)
+#     axes.grid(True)
+#     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize='large')
+#
+#     fig.tight_layout()
+#     plt.show()
+#     return fig
+
+
+# def plot_experiment(temp_concBound, concentration_A, sampleVolume_uL, targetAmount, species="B"):
+#     """This function plots the analyzed results found from Nupack
+#         Input: dictionary of temperatures and % bound species, sample volume in μL,
+#                target molc amount
+#         Output: Plot of results
+#     """
+#
+#     # handling species input
+#     if species.upper() == "B":
+#         dependent_var = 'Percent bound [AB]/[B$]_{0}$'
+#         bound_species = "percent_bound_B"
+#
+#     elif species.upper() == "A":
+#         dependent_var = "Percent bound [AB]/[A]"
+#         bound_species = "percent_bound_A"
+#
+#     # Custom title
+#     if species == "B":
+#         nout = "o"
+#     else:
+#         nout = ""
+#     title_seg1 = ("Percent bound ([AB]/[" + str(species) + "$]_{0}$" + "). " + str(
+#         "{:.2e}".format(targetAmount)) + " copies of target in " +
+#                   str(sampleVolume_uL) + " μL")
+#
+#     fig, axes = plt.subplots(figsize=(10, 6), nrows=1, ncols=1)
+#
+#     colors = cycle(['tab:blue', 'tab:orange', 'tab:red', 'tab:green', 'tab:purple',
+#                     'tab:pink', 'tab:cyan', 'tab:olive', 'tab:brown', 'k'])
+#
+#     ####
+#
+#     ##
+#     for i in range(0, len(temp_concBound)):
+#
+#         Na_M = temp_concBound[i]["Na_M"]
+#         Mg_M = temp_concBound[i]["Mg_M"]
+#
+#         flag_1 = True  # A generic boolian for formatting new lines in the title bar
+#         ions = ''
+#
+#         if len(np.unique(Na_M.squeeze())) == 1:
+#             title_seg2 = '   $Na^+ (M): $' + str(Na_M[i])
+#             #             ions = ions + title_seg2 # part of legend label for Na salts
+#
+#             title = title_seg1 + '.' + '\n' + title_seg2
+#         else:
+#             flag_1 = False
+#             ions = ions + title_seg2  # part of legend label for Na salts
+#             title_seg2 = '   $Na^+ (M): $' + ', '.join(map(str, list(Na_M.squeeze().unique())))
+#             title = title_seg1 + '\n' + title_seg2
+#
+#         if len(np.unique(Mg_M.squeeze())) == 1 and flag_1 == True:
+#             title_seg3 = ' $Mg^{++} (M): $' + str(Mg_M[i])
+#
+#             #             ions = ions + title_seg3 # part of legend label for Na salts
+#             title = title + '\n' + title_seg3
+#         else:
+#             ions = ions + title_seg3  # part of legend label for Na salts
+#             title = title + '\n' + '$Mg^{++} (M): $' + ', '.join(map(str, list(Mg_M.squeeze().unique())))
+#
+#         legend_label = 'Probe Conc: ' + str(concentration_A[i]) + ' M. ' + ions
+#
+#         X = temp_concBound[i]["TempC"]
+#         Y = (temp_concBound[i][bound_species])
+#         axes.plot(X, Y, color=next(colors), markersize=8, marker='o', fillstyle='none', linewidth=2, label=legend_label)
+#     axes.set_xlabel('Temperature [C]', fontsize=16)
+#     axes.set_ylabel(dependent_var, fontsize=16)
+#     axes.set_title(title, fontsize=16)
+#     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize='large')
+#
+#     fig.tight_layout()
+#     plt.show()
+#     plt.savefig('figures/test.png')
+#     return fig
 
 
 def run_all(strands='ATGC', nucleic_acid_type='dna', temperature_C=37, sampleVolume_uL=25,
@@ -969,7 +1061,7 @@ def run_all(strands='ATGC', nucleic_acid_type='dna', temperature_C=37, sampleVol
         save_fig(fig)
     # pause process for 1 second
     time.sleep(1)
-    fig = plot_isotherm(temp_concBound, concentration_A, concentration_B, sampleVolume_uL, targetAmount, species)
+    fig = plot_isotherm(temp_concBound, concentration_A, sampleVolume_uL, targetAmount, species)
     if savefig:  #.lower():
         save_fig(fig)
 

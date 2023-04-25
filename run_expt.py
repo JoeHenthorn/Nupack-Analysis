@@ -41,11 +41,12 @@ temp_intervalC = 3          ####  Input here
 
 temperatureC = list(range(temp_startC,temp_stopC+1,temp_intervalC))
 
-concentration_A_M = [1e-5, 1e-6, 1e-7, 1e-8, 1e-9, 1e-10, 1e-11, 1e-12, 1e-13]  #, 1e-15, 1e-16, 1e-17] # Capture probe
+concentration_A_M = [1e-5, 1e-6, 1e-7, 1e-8] #, 1e-9, 1e-10, 1e-11, 1e-12, 1e-13]  #, 1e-15, 1e-16, 1e-17] # Capture
+# probe
 
 # Strand B
 sampleVolume_uL = 25        ####  Input here
-targetCopyNumber = 2.5e6    ####  Input here
+targetCopyNumber = 10000    ####  Input here # 2.5e6
 
 # Don't change! This code assumes you are inputting the target copy number.
 # If you know the exact concentration(s), make a list and add them into the concentrations list variable below.
