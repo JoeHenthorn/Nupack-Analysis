@@ -10,6 +10,8 @@ sns.set()
 from itertools import cycle
 from datetime import datetime
 from nupack import *
+
+from nupack.concentration import Options
 config.parallelism = True
 config.cache = 8.0 # GB
 
@@ -303,8 +305,9 @@ def models_maker(nucleic_acid_type='dna', temperature_C=37, Na_M=0.05, Mg_M=0):
                 # If you want your output to match the NUPACK web app, comment out the model line about and uncomment
                 # the line below.
                 # FOR DNA
-                # models[label] = Model(material='dna04', ensemble='stacking', celsius=temp, sodium=conc_Na, magnesium=conc_Mg)
-                models[label] = Model(material='dna04-nupack3', ensemble='some-nupack3', celsius=temp, sodium=conc_Na, magnesium=conc_Mg)
+                models[label] = Model(material='dna04-nupack3', ensemble='stacking', celsius=temp, sodium=conc_Na,
+                                      magnesium=conc_Mg)
+                # models[label] = Model(material='dna04-nupack3', ensemble='some-nupack3', celsius=temp, sodium=conc_Na, magnesium=conc_Mg)
                 # FOR RNA
                 # models[label] = Model(material='rna95-nupack3', celsius=temp, sodium=conc_Na, magnesium=conc_Mg)
                 i += 1
@@ -493,6 +496,7 @@ def analysis_job(tubes, models):
               models: <nupack.model.Model at XXXX>, can be dictionary
        Output: results from analysis: partition func, ΔG(kcal/mol),concnetration results
     """
+    logging.info("Running analysis job")
     # print("Tube type: "+str(type(tubes)))
     # convert dict or object to list
     if isinstance(models, dict):
@@ -514,32 +518,29 @@ def analysis_job(tubes, models):
 
     i = 0  # counter
 
-    kwargs = {'max_iters': 20000, 'tolerance': 1e-06}
+    # kwargs = {'num_sample': 20000, 'energy_gap': 1e-07} # wrong parameters
+    # kwargs = {'max_iters': 20000, 'tolerance': 1e-05}
 
     for model in models_list:
+        logging.info("Running analysis for model: "+str(model))
         label = str(list(models.keys())[i])
 
         ii = 0
         for tube in tubes_list:
+            logging.info("Running analysis for tube: "+str(tube))
             label_full = label + str(list(tubes.keys())[ii])
 
             # run tube analysis job # Debugging
             # tube = tube[list(tube.keys())[0]] # Debugging
             # model = model[list(model.keys())[0]] # Debugging
             try:
-                results[label_full] = tube_analysis(tubes=[tube], model=model)  #, **kwargs)
-            # except AssertionError as e:
-            #     print("AssertionError: "+str(e))
-            #     print("Tube: "+str(tube))
-            #     print("Model: "+str(model))
-            #     print("Label: "+str(label))
-            #     print("Label_full: "+str(label_full))
+                logging.info("Running analysis for tube: "+str(tube))
+                results[label_full] = tube_analysis(tubes=[tube], model=model)  #, compute=['pfunc'], options=kwargs)
+                logging.info("Finished analysis for tube: "+str(tube))
+                logging.info("Results: "+str(results[label_full]))
             except Exception as e:
-                print("Exception: "+str(e))
-                print("Tube: "+str(tube))
-                print("Model: "+str(model))
-                print("Label: "+str(label))
-                print("Label_full: "+str(label_full))
+                logging.info("Exception: "+str(e))
+                logging.info("Failed analysis for tube: "+str(tube))
 
 
             ii += 1
@@ -553,6 +554,7 @@ def run_analysis(strands_input=['ATGC'], nucleic_acid_type='dna', temperature_C=
                  complex_numb=2):
     """Wrapper function for analysis functions
     """
+    logging.info("Starting run_analysis")
     if not isinstance(strands_input, list):
         strands_input = [strands_input]
 
@@ -611,6 +613,7 @@ def run_analysis(strands_input=['ATGC'], nucleic_acid_type='dna', temperature_C=
     print("Strand B initial concentrations: " + str(concentrations[1]))
 
     # Build test tubes
+    logging.info("Building test tubes")
     tubes = specify_tube(strand_dict, setSpec=complex_numb)
     # tube_analysis
     # tubes = Tube(strands=strand_dict, complexes=SetSpec(max_size=complexes), name='t1')
@@ -627,6 +630,7 @@ def make_dataFrame_from_results(Results=pd.DataFrame()):
         This function is currently static, and should be rewritten to generalize.
         Inputs: results from make_dataFrame_from_results()
     """
+    logging.info("make_dataFrame_from_results()")
     strand_names = strand_names_catalog()
     column_names = ['Material',
                     'TemperatureC',
@@ -650,6 +654,7 @@ def make_dataFrame_from_results(Results=pd.DataFrame()):
 
     df = pd.DataFrame(columns=column_names)
 
+    logging.debug("Results.keys(): "+str(list(Results.keys())))
     for i in range(0, len(list(Results.keys()))):
 
         t_result = Results[list(Results.keys())[i]].tubes
@@ -951,11 +956,14 @@ def run_all(strands='ATGC', nucleic_acid_type='dna', temperature_C=37, sampleVol
 
     #     print('concentration_B' + str(concentration_B))
     #     print(temperature_C)
+
     results = run_analysis(strands, nucleic_acid_type, temperature_C,
                            Na_M, Mg_M,
                            concentrations, complexes)
 
-    print(report_parameters(results)[0][5:-26])  # Displays results and information
+
+    logging.debug(f"results: {results}")
+    # print(report_parameters(results)[0][5:-26])  # Displays results and information
 
     df_Nupack, t_result, c_result = make_dataFrame_from_results(results)  ###################################
 

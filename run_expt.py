@@ -20,8 +20,15 @@ Saving figures: If you want to save the figure, include "save", otherwise it doe
 '''
 import math
 
+import logging
 from npktools import run_all, convert_copy_number_to_concentration
 
+logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+#
+# # this is not in use yet, but I want to make it so that the user can choose to analyze more than 2 strands
+# # input the number of strands you want to analyze
+# num_strands = 2            ####  Input here
 # Insert your sequence here! NOTE: You do not need to type in a complementary strand_2 ...
 # ... if the second strand is fully complementary to the first.
 # Strand A  5'- 3'
@@ -35,18 +42,18 @@ nucleic_acid_type ='DNA'    ####  Input here
 
 complexes = 2               ####  Input here
 
-temp_startC = 50            ####  Input here
+temp_startC = 35            ####  Input here
 temp_stopC = 100            ####  Input here
 temp_intervalC = 3          ####  Input here
 
 temperatureC = list(range(temp_startC,temp_stopC+1,temp_intervalC))
 
-concentration_A_M = [1e-5, 1e-6, 1e-7, 1e-8] #, 1e-9, 1e-10, 1e-11, 1e-12, 1e-13]  #, 1e-15, 1e-16, 1e-17] # Capture
+concentration_A_M = [1e-5, 1e-6, 1e-7, 1e-8, 1e-9, 1e-10, 1e-11, 1e-12, 1e-13, 1e-15, 1e-16, 1e-17] # Capture
 # probe
 
 # Strand B
 sampleVolume_uL = 25        ####  Input here
-targetCopyNumber = 10000    ####  Input here # 2.5e6
+targetCopyNumber = 100000    ####  Input here # 2.5e6
 
 # Don't change! This code assumes you are inputting the target copy number.
 # If you know the exact concentration(s), make a list and add them into the concentrations list variable below.
@@ -68,6 +75,7 @@ species = "B"                ####  Input here
 
 if __name__ == "__main__":
     # Run the analysis
+    logging.info('Starting run_all()')
     Results, df_Nupack, temp_concBound, t_result, c_result = run_all(strands,
                                                                      nucleic_acid_type,
                                                                      temperatureC,
